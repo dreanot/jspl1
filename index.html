@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h3>Product List</h3>
+
+<input id="minPrice" placeholder="Enter minimum price">
+<button onclick="filterProducts()">Filter</button>
+
+<ul id="productList"></ul>
+
+<script>
+  const productsData = {
+    products: [
+      { id: 1, name: "Laptop",     price: 50000 },
+      { id: 2, name: "Phone",      price: 20000 },
+      { id: 3, name: "Headphones", price: 3000  },
+      { id: 4, name: "Monitor",    price: 15000 }
+    ]
+  };
+
+  const list = document.getElementById("productList");
+
+  function displayProducts(products) {
+    list.innerHTML = "";
+    products.forEach(p => {
+      const li = document.createElement("li");
+      li.textContent = `${p.name} - ₹${p.price}`;
+      list.appendChild(li);
+      console.log(p.name, p.price);
+    });
+  }
+
+  function filterProducts() {
+    const min = parseInt(document.getElementById("minPrice").value) || 0;
+
+    const filtered = productsData.products.filter(p => p.price >= min);
+
+    displayProducts(filtered);
+  }
+
+  displayProducts(productsData.products);
+</script>
+
+</body>
+</html>
